@@ -53,14 +53,32 @@ const response = await fetch("https://api.zeptomail.com/v1.1/email/template", {
 
 ## ⚙️ Setup & Usage
 
-### 1. Generate an OAuth Token
-To create templates via the API, you need an OAuth token (your standard Send Mail Token will **not** work).
-1. Go to the [Zoho API Console](https://api-console.zoho.com/).
-2. Create a **Self Client**.
-3. Generate a code with the scope: `ZeptoMail.MailTemplates.ALL`.
-4. Use the script to exchange this code for an Access Token.
+Here is the exact step-by-step process you need to follow to configure the script:
 
-### 2. Configure the Script
+### Step 1: Get your Agent Alias
+1. Log in to your ZeptoMail Dashboard.
+2. Click on **Mail Agents** in the left sidebar and select the agent you are using.
+3. Click on the **SMTP/API** tab.
+4. Copy the **Agent Alias** (it's usually a short string). Save this somewhere for a moment.
+
+### Step 2: Create a Zoho "Self Client"
+1. Open a new browser tab and go to the [Zoho API Console](https://api-console.zoho.com/).
+2. Click **Get Started** (or "Add Client" if you already have others).
+3. Choose the **Self Client** option and click **Create Now**.
+4. Click **OK** to confirm.
+5. In the Client Secret tab that appears, you will see a Client ID and a Client Secret. Leave this tab open.
+
+### Step 3: Generate a Temporary Authorization Code
+1. Still in the Zoho API Console (for your Self Client), click on the **Generate Code** tab.
+2. In the Scope field, copy and paste this exact text: `ZeptoMail.MailTemplates.ALL`
+3. Set the Time Duration to 10 minutes (or whatever is available).
+4. Enter any random text (like "Template Import") in the Description field, and click **Generate**.
+5. A window will pop up with a long Authorization Code. Copy it!
+
+### Step 4: Exchange for OAuth Token
+Exchange that temporary code for an OAuth Access Token. (You can do this by making a quick POST request to Zoho's token endpoint).
+
+### Step 5: Configure the Script
 Open `bulk_import.py` and modify the configuration block:
 - Set your `OAUTH_TOKEN` (or allow the script to prompt you for the exchange).
 - Set your `BASE_URL` based on your region (e.g., `.com`, `.eu`, `.in`).
