@@ -98,5 +98,21 @@ The script will:
 3. Automatically push them to the correct ZeptoMail Mail Agent.
 4. Pause for 1 second between uploads to prevent ZeptoMail from throttling the requests.
 
+---
+
+## 🔍 Fetching the Master Template Registry
+Once you have uploaded all your templates across all agents, your developers will need to know the exact **Template Aliases** or **Template Keys** to use when calling the Send Mail API.
+
+Instead of hunting through the ZeptoMail UI, use the included `fetch_aliases.py` script to automatically generate a beautiful Markdown table of every template in your account.
+
+1. Configure `fetch_aliases.py` with your OAuth token and Agent Aliases.
+2. Run the script:
+   ```bash
+   python3 fetch_aliases.py
+   ```
+3. A file named `zepto_mail_master_registry.md` will be generated, containing a perfect list of both the Readable Aliases (`template_name`) and the Immutable Keys (`template_key`) for every single template across all languages!
+
+---
+
 ## 📄 License
 MIT License. Feel free to use and modify for your own projects!
